@@ -7,7 +7,7 @@ const multer = require('multer');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-if (process.env.NODE_ENV.toString() !== "production") {
+if (process.env.NODE_ENV !== "production") {
 	const options = {
 		swaggerDefinition: {
 			info: {

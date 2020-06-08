@@ -1,20 +1,8 @@
 {
-  "PG_HOST": "localhost",
-  "PG_USER": "klypalskyi",
-  "PG_PASS": "admin",
-  "PG_DB": "genesis",
-  "PG_PORT": 5432,
   "PG_CONF": {
     "max": 20,
     "connectionTimeoutMills": 0,
     "idleTimeoutMills": 0
-  },
-  "DB_CONFIG": {
-    "host": "localhost",
-    "user": "klypalskyi",
-    "password": "admin",
-    "database": "genesis",
-    "port": 5432
   },
   "TABLE_NAMES": {
     "rests": "restaurants",

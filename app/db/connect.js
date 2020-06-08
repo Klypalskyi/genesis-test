@@ -11,7 +11,7 @@ exports.start = async () => {
   const port = config.get("PG_PORT");
   const database = config.get("PG_DB");
   const additional = config.get("PG_CONFIG");
-  const dbConfig = { user, password, host, port: parseInt(port), database }
+  const dbConfig = { user, password, host, port: parseInt(port), database };
   try {
     await migrate.run({ ...dbConfig });
     this.pool = new Pool({ ...dbConfig, ...additional });
@@ -22,8 +22,9 @@ exports.start = async () => {
     this.close();
   }
 };
+
 exports.close = async () => await this.pool.end();
-exports.query = async (q, data) => await this.pool.query(q, data)
+exports.query = async (q, data) => await this.pool.query(q, data);
 
 exports.createData = async dbConfig => {
   const TABLE_NAMES = config.get("TABLE_NAMES");
