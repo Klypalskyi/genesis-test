@@ -18,14 +18,31 @@ exports.start = async () => {
     console.info("Database connected");
     this.createData(dbConfig);
   } catch (error) {
-    console.error(error)
+    console.error(`DB Error: ${error.routine || error.message}`)
     this.close();
+    process.emit("SIGTERM");
   }
 };
 
-exports.close = async () => await this.pool.end();
-exports.query = async (q, data) => await this.pool.query(q, data);
+exports.close = async () => {
+  try {
+    const result = await this.pool.end();
+    return result;  
+  } catch (error) {
+    console.error('Database is not connected');
+    return new Error('Database is not connected');
+  }
+}
 
+exports.query = async (q, data) => {
+  try {
+    const result = await this.pool.query(q, data);
+    return result;  
+  } catch (error) {
+    console.error('Database is not connected');
+    return new Error('Database is not connected');
+  }
+}
 exports.createData = async dbConfig => {
   const TABLE_NAMES = config.get("TABLE_NAMES");
   
@@ -86,6 +103,6 @@ exports.createData = async dbConfig => {
       await sqlFixtures.destroy();
     }
 	} catch (error) {
-    console.error(error);
+    console.error(error.message || error);
 	}
 };

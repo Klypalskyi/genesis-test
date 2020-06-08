@@ -3,6 +3,7 @@ const http = require('http');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const multer = require('multer');
+const db = require('./db/connect');
 
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
@@ -70,6 +71,20 @@ const startServer = port => {
   httpServer.listen(port, () => {
 		console.log('Server is on ' + port);
 	});
-}
+};
+
+process.on('SIGTERM', () => {
+  console.info('SIGTERM signal received.');
+  console.log('Closing http server.');
+  httpServer.close(() => {
+		console.log('Http server closed.');
+		if (db.pool) {
+			db.close()
+				.then(() => console.log("Database connection closed"))
+				.catch(e => console.log(e))
+				.finally(() => process.exit(0))
+		}
+  });
+});
 
 module.exports = startServer;
