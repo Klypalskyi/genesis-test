@@ -7,43 +7,39 @@ const multer = require('multer');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-if (process.env.NODE_ENV !== "production") {
-	const options = {
-		swaggerDefinition: {
-			info: {
-				title: 'Genesis test task API',
-				version: '0.0.1',
-				description: 'Food Delivery BE'
-			},
-			basePath: '/v1',
-			security: [],
-			tags: [
-				{
-					name: "Restaurants",
-					description: "Operations with restaurants"
-				},
-				{
-					name: "Clients",
-					description: "Operations with clients"
-				},
-				{
-					name: "Orders",
-					description: "Operations with orders"
-				},
-				{
-					name: "Scouts",
-					description: "Operations with scouts"
-				},
-			]
+
+const options = {
+	swaggerDefinition: {
+		info: {
+			title: 'Genesis test task API',
+			version: '0.0.1',
+			description: 'Food Delivery BE'
 		},
-		// List of files to be processes. You can also set globs './routes/*.js'
-		apis: ['./app/definitions/*.js', './app/router/*.js']
-	};
-
-	const specs = swaggerJsdoc(options);
-
-	app.use('/v1/swagger', swaggerUi.serve, swaggerUi.setup(specs));
-}
+		basePath: '/v1',
+		security: [],
+		tags: [
+			{
+				name: "Restaurants",
+				description: "Operations with restaurants"
+			},
+			{
+				name: "Clients",
+				description: "Operations with clients"
+			},
+			{
+				name: "Orders",
+				description: "Operations with orders"
+			},
+			{
+				name: "Scouts",
+				description: "Operations with scouts"
+			},
+		]
+	},
+	apis: ['./app/definitions/*.js', './app/router/*.js']
+};
+const specs = swaggerJsdoc(options);
+app.use('/v1/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 
 const router = require('./router');
 
