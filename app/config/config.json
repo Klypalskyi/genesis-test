@@ -1,0 +1,34 @@
+{
+  "PG_HOST": "localhost",
+  "PG_USER": "klypalskyi",
+  "PG_PASS": "admin",
+  "PG_DB": "genesis",
+  "PG_PORT": 5432,
+  "PG_CONF": {
+    "max": 20,
+    "connectionTimeoutMills": 0,
+    "idleTimeoutMills": 0
+  },
+  "DB_CONFIG": {
+    "host": "localhost",
+    "user": "klypalskyi",
+    "password": "admin",
+    "database": "genesis",
+    "port": 5432
+  },
+  "TABLE_NAMES": {
+    "rests": "restaurants",
+    "scouts": "scouts",
+    "orders": "orders",
+    "clients": "clients"
+  },
+  "TABLE_COLUMNS": {
+    "restColumns": "name, locationlat, locationlng, address",
+    "clientColumns": "name, familyname, locationlat, locationlng, address",
+    "scoutColumnsCreate": "name",
+    "scoutColumnsCalc": "totalcount, totalamount, avgtime, favlocation",
+    "orderColumnsCreate": "clientid, scoutid, restid, amount",
+    "orderColumnsClose": "enddate, duration, estimate, rate"
+  },
+  "GOOGLE_MAPS_CALC": "https://maps.googleapis.com/maps/api/directions/json"
+}
